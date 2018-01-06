@@ -1,0 +1,31 @@
+# marksheet = []
+# #for _ in range(0, int(raw_input())):
+# #    marksheet.append([raw_input(), float(raw_input())])
+#
+#
+def nested_list(marksheet):
+
+    marksheet = sorted(marksheet, key=lambda x: x[1])
+
+    sec_min = 0
+    i = 0
+    while i < len(marksheet) - 1:
+        if marksheet[i][1] != marksheet[i + 1][1]:
+            sec_min = marksheet[i + 1][1]
+            break
+        i = i + 1
+
+    marksheet.sort()
+
+    result = []
+
+    for i in range(len(marksheet)):
+        if marksheet[i][1] == sec_min:
+            yield marksheet[i][0]
+            # result.append(marksheet[i][0])
+
+
+for i in nested_list([['Harry', 37.21], ['Berry', 37.21], ['Tina', 37.2], ['Akriti', 41], ['Harsh', 39]]):
+    print i
+
+
