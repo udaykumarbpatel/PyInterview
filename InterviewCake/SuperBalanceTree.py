@@ -59,14 +59,16 @@ class BinarySearchTree(object):
             else:
                 return self.search(node.left, t)
 
-    def traverse(self, root):
-        this_level = [root]
+    def level_by_level(self):
+        this_level = [self.root]
         while this_level:
             next_level = list()
             for n in this_level:
                 print n.key,
-                if n.left: next_level.append(n.left)
-                if n.right: next_level.append(n.right)
+                if n.left:
+                    next_level.append(n.left)
+                if n.right:
+                    next_level.append(n.right)
             print
             this_level = next_level
 
@@ -83,6 +85,7 @@ class BinarySearchTree(object):
                 return left_height + 1
             else:
                 return right_height + 1
+
     def min_value_in_tree(self, root):
         if root.left is None:
             return root.key
@@ -107,11 +110,11 @@ r.insert(5)
 
 print "InOrder              :  ", r.in_order(r.root)
 print "PreOrder             :  ", r.pre_order(r.root)
-print "PostOrder            :  ",r.post_order(r.root)
-print "Is 7 in Tree?        :  ",r.search(r.root, 7)
-print "Is 11 in Tree        :  ",r.search(r.root, 11)
+print "PostOrder            :  ", r.post_order(r.root)
+print "Is 7 in Tree?        :  ", r.search(r.root, 7)
+print "Is 11 in Tree        :  ", r.search(r.root, 11)
 print "Height of the Tree   :  ", r.height_of_tree(r.root)
 print "Level By Level Tree  :"
-print r.traverse(r.root)
+print r.level_by_level()
 print "Minimum value in Tree:  ", r.min_value_in_tree(r.root)
 print "Maximum value in Tree:  ", r.max_value_in_tree(r.root)
