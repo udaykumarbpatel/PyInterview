@@ -17,7 +17,7 @@ class BinarySearchTree(object):
             node = self.root
             while True:
                 if t < node.key:
-                    if node.left == None:
+                    if node.left is None:
                         node.left = new
                         break
                     node = node.left
@@ -98,6 +98,65 @@ class BinarySearchTree(object):
         else:
             return self.max_value_in_tree(root.right)
 
+    def is_super_balanced(self, root):
+        if root is None:
+            return True
+
+        depths = []
+
+        nodes = []
+        nodes.append((self.root, 0))
+
+        while len(nodes):
+            node, depth = nodes.pop()
+
+            if not node.left and not node.right:
+                if depth not in depths:
+                    depths.append(depth)
+
+                if len(depths) > 2 or (len(depths) == 2 and abs(depths[0] - depths[1]) > 1):
+                    return False
+            else:
+                if node.left:
+                    nodes.append((node.left, depth + 1))
+                if node.right:
+                    nodes.append((node.right, depth + 1))
+        return True
+
+    def valid_binary_search_tree(self, root, low=-float('inf'), high=float('inf')):
+        if not root:
+            return True
+
+        if root.key >= high or root.key <= low:
+            return False
+
+        return (self.valid_binary_search_tree(root.left, low, root.key) and self.valid_binary_search_tree(root.right,
+                                                                                                          root.key,
+                                                                                                          high))
+
+    def largest(self, root):
+        current = root
+        while current:
+            if not current.right:
+                return current.key
+            current = current.right
+
+    def second_largest(self, root):
+        if root is None or (root.left is None and root.right is None):
+            return "Error"
+
+        current = root
+
+        while current:
+            if current.left and not current.right:
+                return self.largest(current.left)
+
+            if current.right and not current.right.left and not current.right.right:
+                return current.value
+
+            current = current.right
+
+
 
 r = BinarySearchTree()
 r.insert(10)
@@ -118,3 +177,6 @@ print "Level By Level Tree  :"
 print r.level_by_level()
 print "Minimum value in Tree:  ", r.min_value_in_tree(r.root)
 print "Maximum value in Tree:  ", r.max_value_in_tree(r.root)
+print "Is Super Balanced    :  ", r.is_super_balanced(r.root)
+print "Is Binary Tree       :  ", r.valid_binary_search_tree(r.root)
+print "Second Largest in BST:  ", r.second_largest(r.root)

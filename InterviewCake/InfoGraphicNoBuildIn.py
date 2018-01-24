@@ -13,7 +13,7 @@ def input_read(input):
 
     for c in input:
         if c.isupper():
-            c = c.swapcase()
+            c = c.lower()
         clean_input += c
 
     for c in clean_input:

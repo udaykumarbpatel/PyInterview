@@ -6,8 +6,12 @@ def make_trie(*words):
     for word in words:
         current_dict = root
         for letter in word:
-            current_dict = current_dict.setdefault(letter, {})
-        current_dict[_end] = _end
+            if letter not in current_dict:
+                current_dict[letter] = {}
+            current_dict = current_dict[letter]
+            # current_dict = current_dict.setdefault(letter, {})
+        if _end not in current_dict:
+            current_dict[_end] = _end
     print root
     return root
 
@@ -24,5 +28,6 @@ def in_trie(trie, word):
             return True
         else:
             return False
+
 
 print in_trie(make_trie('foo', 'bar', 'baz', 'barz'), 'baz')
