@@ -1,0 +1,31 @@
+import math
+
+# numDestinations = 3
+# allLocations=[[1,2],[3,4],[1,-1]]
+# numDeliveries=2
+
+numDestinations = 7
+allLocations=[[3,6],[2,4],[5,3],[2,7],[1,8],[7,9],[3,5]]
+numDeliveries=3
+
+def Clos(numDestinations, allLocations, numDeliveries):
+    output= {}
+    for location in allLocations:
+        x = math.sqrt((location[0]*location[0]) + (location[1]*location[1]))
+        output[x] = location
+
+    print output
+    keylist = output.keys()
+    keylist.sort()
+
+    delivery = 0
+    ret_lst = []
+    for key in keylist:
+        if delivery < numDeliveries:
+            ret_lst.append(output[key])
+            delivery = delivery+1
+
+    return ret_lst
+
+print Clos(numDestinations, allLocations, numDeliveries)
+

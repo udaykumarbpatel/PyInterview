@@ -9,3 +9,6 @@ def has_palindrome_permutation(the_string):
             unpaired_characters.add(char)
 
     return len(unpaired_characters) <= 1
+
+
+has_palindrome_permutation("malayalam")

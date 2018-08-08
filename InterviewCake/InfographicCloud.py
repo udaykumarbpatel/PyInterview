@@ -18,6 +18,6 @@ def infographic_cloud(input_string):
 
 
 
-infographic_cloud("'After beating the eggs, Dana read the next step:' 'Add milk and eggs, then add flour and sugar.'")
+infographic_cloud("jack and jill went to the market to buy bread and cheese cheese is jack favorite food")
 
 

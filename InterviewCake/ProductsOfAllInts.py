@@ -8,6 +8,8 @@ def product_of_all_ints(x):
         product *= x[i]
         i += 1
 
+    print result
+
     product = 1
     i = len(x) - 1
     while i >= 0:
