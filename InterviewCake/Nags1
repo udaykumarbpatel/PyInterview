@@ -1,20 +1,24 @@
-import math
+
 
 # numDestinations = 3
 # allLocations=[[1,2],[3,4],[1,-1]]
 # numDeliveries=2
+from collections import defaultdict
 
 numDestinations = 7
 allLocations=[[3,6],[2,4],[5,3],[2,7],[1,8],[7,9],[3,5]]
 numDeliveries=3
 
-def Clos(numDestinations, allLocations, numDeliveries):
-    output= {}
+
+import math
+
+from collections import defaultdict
+def ClosestXdestinations(numDestinations, allLocations, numDeliveries):
+    output= defaultdict(list)
     for location in allLocations:
         x = math.sqrt((location[0]*location[0]) + (location[1]*location[1]))
-        output[x] = location
+        output[x].append(location)
 
-    print output
     keylist = output.keys()
     keylist.sort()
 
@@ -22,10 +26,17 @@ def Clos(numDestinations, allLocations, numDeliveries):
     ret_lst = []
     for key in keylist:
         if delivery < numDeliveries:
-            ret_lst.append(output[key])
-            delivery = delivery+1
+            if len(output[key])>1:
+                for op in output[key]:
+                    ret_lst.append(op)
+                    delivery = delivery+1
+                    if delivery > numDeliveries:
+                        break
+            else:
+                ret_lst.append(output[key])
+                delivery = delivery + 1
 
     return ret_lst
 
-print Clos(numDestinations, allLocations, numDeliveries)
+print ClosestXdestinations(numDestinations, allLocations, numDeliveries)
 
